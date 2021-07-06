@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 /**
  * External imports
@@ -15,15 +16,18 @@ import { useStyles } from "./ColorBox.styles";
  * Defines the props interface
  */
 export interface ColorBoxProps {
-  background: string;
-  name: string;
+  background?: string;
+  name?: string;
+  colorId: string;
+  paletteId?: string;
+  showLink: boolean;
 }
 
 /**
  * Displays the component
  */
 export const ColorBox: React.FC<ColorBoxProps> = (props) => {
-  const { background, name } = props;
+  const { background, name, colorId, paletteId, showLink } = props;
 
   /**
    * Gets the component styles
@@ -45,7 +49,7 @@ export const ColorBox: React.FC<ColorBoxProps> = (props) => {
   }, [copied]);
 
   return (
-    <CopyToClipboard text={background} onCopy={changeCopyState}>
+    <CopyToClipboard text={background!} onCopy={changeCopyState}>
       <div style={{ background }} className={classes.ColorBox}>
         <div
           style={{ background }}
@@ -67,7 +71,14 @@ export const ColorBox: React.FC<ColorBoxProps> = (props) => {
           </div>
           <button className={classes.copyButton}>Copy</button>
         </div>
-        <span className={classes.seeMore}>More</span>
+        {showLink && (
+          <Link
+            to={`/palette/${paletteId}/${colorId}`}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <span className={classes.seeMore}>More</span>
+          </Link>
+        )}
       </div>
     </CopyToClipboard>
   );

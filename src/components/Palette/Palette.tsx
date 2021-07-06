@@ -1,6 +1,9 @@
+import { useState } from "react";
+
 /**
  * Imports components
  */
+import { Navbar } from "../Navbar";
 import { ColorBox } from "../ColorBox";
 
 /**
@@ -11,13 +14,13 @@ import { useStyles } from "./Palette.styles";
 /**
  * Imports Seed Color inteface
  */
-import { SeedColor } from "../../utils";
+import { NewPalette } from "../../utils";
 
 /**
  * Defines the props interface
  */
 export interface PaletteProps {
-  palette: SeedColor;
+  palette: NewPalette;
 }
 
 /**
@@ -31,17 +34,55 @@ export const Palette: React.FC<PaletteProps> = (props) => {
   const classes = useStyles();
 
   /**
+   * Inits the Slider state
+   */
+  const [level, setLevel] = useState(500);
+
+  /**
+   * Init the selector format state
+   */
+  const [format, setFormat] = useState("hex");
+
+  /**
+   * Handles changing the slider's level
+   */
+  const changeLevel = (newLevel: number) => {
+    setLevel(newLevel);
+  };
+
+  /**
+   * Handles changing the Color format
+   */
+  const changeColorFormat = (val: string) => {
+    setFormat(val);
+  };
+
+  /**
    * Handles generating color boxes
    */
-  const colorBoxes = palette.colors.map((color) => (
-    <ColorBox background={color.color} name={color.name} />
+  const colorBoxes = palette.colors[level].map((color) => (
+    <ColorBox
+      colorId={color.id}
+      paletteId={palette.id}
+      key={color.id}
+      background={color[format]}
+      name={color.name}
+      showLink
+    />
   ));
 
   return (
     <div className={classes.Palette}>
-      {/* navbar here */}
+      <Navbar
+        level={level}
+        changeLevel={changeLevel}
+        handleChange={changeColorFormat}
+      />
       <div className={classes.PaletteColors}>{colorBoxes}</div>
-      {/* Footer */}
+      <footer className={classes.paletteFooter}>
+        {palette.paletteName}
+        <span className={classes.emoji}>{palette.emoji}</span>
+      </footer>
     </div>
   );
 };

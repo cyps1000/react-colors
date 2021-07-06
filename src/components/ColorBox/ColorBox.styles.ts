@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: "inline-block",
     position: "relative",
     cursor: "pointer",
-    marginBottom: "-3.5px",
+    marginBottom: -4,
     "&:hover button": {
       opacity: 1,
       transition: "0.5s"
