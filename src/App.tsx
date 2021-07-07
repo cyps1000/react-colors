@@ -6,6 +6,8 @@ import { Route, Switch } from "react-router-dom";
 import { Palette } from "./components/Palette";
 import { PaletteList } from "./components/PaletteList";
 import { SingleColorPalette } from "./components/SingleColorPalette";
+import { NewPaletteForm } from "./components/NewPaletteForm";
+import { Page } from "./components/Page";
 
 /**
  * Imports Seed Colors
@@ -27,6 +29,9 @@ export const App: React.FC = () => {
 
   return (
     <Switch>
+      <Route exact path="/palette/new">
+        <NewPaletteForm />
+      </Route>
       <Route exact path="/">
         <PaletteList palettes={seedColors} />
       </Route>
@@ -34,12 +39,15 @@ export const App: React.FC = () => {
         exact
         path="/palette/:paletteId/:colorId"
         render={(props) => (
-          <SingleColorPalette
-            colorId={props.match.params.colorId}
-            palette={generatePalette(
-              findPalette(props.match.params.paletteId)!
-            )}
-          />
+          <Page>
+            <SingleColorPalette
+              id={props.match.params.paletteId}
+              colorId={props.match.params.colorId}
+              palette={generatePalette(
+                findPalette(props.match.params.paletteId)!
+              )}
+            />
+          </Page>
         )}
       />
       <Route

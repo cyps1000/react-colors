@@ -25,8 +25,9 @@ import { useStyles } from "./Navbar.styles";
  * Defines the props interface
  */
 export interface NavbarProps {
-  level: number;
-  changeLevel: (l: number) => void;
+  level?: number;
+  showingAllColors?: boolean;
+  changeLevel?: (l: number) => void;
   handleChange: (val: string) => void;
 }
 
@@ -34,7 +35,7 @@ export interface NavbarProps {
  * Displays the component
  */
 export const Navbar: React.FC<NavbarProps> = (props) => {
-  const { level, changeLevel, handleChange } = props;
+  const { level, showingAllColors, changeLevel, handleChange } = props;
 
   /**
    * Gets the component styles
@@ -70,18 +71,20 @@ export const Navbar: React.FC<NavbarProps> = (props) => {
       <div className={classes.logo}>
         <Link to="/">reactcolorpicker</Link>
       </div>
-      <div className={classes.sliderContainer}>
-        <span>Level: {level}</span>
-        <div className={classes.slider}>
-          <Slider
-            defaultValue={level}
-            min={100}
-            max={900}
-            step={100}
-            onAfterChange={changeLevel}
-          />
+      {showingAllColors && (
+        <div>
+          <span>Level: {level}</span>
+          <div className={classes.slider}>
+            <Slider
+              defaultValue={level}
+              min={100}
+              max={900}
+              step={100}
+              onAfterChange={changeLevel}
+            />
+          </div>
         </div>
-      </div>
+      )}
       <div className={classes.selectContainer}>
         <Select value={format} onChange={handleFormatChange}>
           <MenuItem value="hex">HEX - #ffffff</MenuItem>

@@ -8,15 +8,17 @@ import { makeStyles, Theme } from "@material-ui/core/styles";
  * Styles the component
  */
 const useStyles = makeStyles((theme: Theme) => ({
-  Palette: {
-    height: "100vh",
+  Footer: {
+    backgroundColor: "white",
+    height: "5vh",
     display: "flex",
-    flexDirection: "column",
-    overflowY: "scroll",
-    overflowX: "hidden"
+    justifyContent: "flex-end",
+    alignItems: "center",
+    fontWeight: "bold"
   },
-  PaletteColors: {
-    height: "90%"
+  emoji: {
+    fontSize: "1.2rem",
+    margin: "0.7rem"
   }
 }));
 

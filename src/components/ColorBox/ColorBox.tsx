@@ -16,7 +16,7 @@ import { useStyles } from "./ColorBox.styles";
  * Defines the props interface
  */
 export interface ColorBoxProps {
-  background?: string;
+  background: string;
   name?: string;
   colorId: string;
   paletteId?: string;
@@ -32,7 +32,7 @@ export const ColorBox: React.FC<ColorBoxProps> = (props) => {
   /**
    * Gets the component styles
    */
-  const classes = useStyles();
+  const classes = useStyles({ showingFullPalette: showLink, background });
 
   /**
    * Inits the Copy state
@@ -63,11 +63,11 @@ export const ColorBox: React.FC<ColorBoxProps> = (props) => {
           })}
         >
           <h1>copied!</h1>
-          <p>{background}</p>
+          <p className={classes.copyText}>{background}</p>
         </div>
-        <div className={classes.copyContainer}>
+        <div>
           <div className={classes.boxContent}>
-            <span>{name}</span>
+            <span className={classes.colorName}>{name}</span>
           </div>
           <button className={classes.copyButton}>Copy</button>
         </div>

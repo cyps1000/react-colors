@@ -50,10 +50,15 @@ export const PaletteList: React.FC<PaletteListProps> = (props) => {
       <div className={classes.containter}>
         <nav className={classes.nav}>
           <h1>React Colors</h1>
+          <Link to="/palette/new">Create Palette</Link>
         </nav>
         <div className={classes.palettes}>
           {palettes.map((palette) => (
-            <MiniPalette goToPalette={goToPalette} palette={palette} />
+            <MiniPalette
+              key={palette.id}
+              goToPalette={goToPalette}
+              palette={palette}
+            />
           ))}
         </div>
       </div>

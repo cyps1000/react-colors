@@ -1,27 +1,69 @@
 /**
+ * External Imports
+ */
+import chroma from "chroma-js";
+
+/**
  *  Material UI Imports
  * @see https://material-ui.com/styles/basics/
  */
 import { makeStyles, Theme } from "@material-ui/core/styles";
 
 /**
+ * Defines the ColorBox interface
+ */
+interface ColorBoxProps {
+  showingFullPalette?: boolean;
+  background?: string;
+}
+
+/**
  * Styles the component
  */
 const useStyles = makeStyles((theme: Theme) => ({
-  ColorBox: {
-    width: "20%",
-    height: "25%",
-    margin: "0 auto",
-    display: "inline-block",
-    position: "relative",
-    cursor: "pointer",
-    marginBottom: -4,
-    "&:hover button": {
-      opacity: 1,
-      transition: "0.5s"
-    }
+  ColorBox: (props: ColorBoxProps) => {
+    const { showingFullPalette } = props;
+
+    return {
+      width: "20%",
+      height: showingFullPalette ? "25%" : "50%",
+      margin: "0 auto",
+      display: "inline-block",
+      position: "relative",
+      cursor: "pointer",
+      marginBottom: -4,
+      "&:hover button": {
+        opacity: 1,
+        transition: "0.5s"
+      },
+      [theme.breakpoints.down("lg")]: {
+        width: "25%",
+        height: showingFullPalette ? "20%" : "33.3333%"
+      },
+      [theme.breakpoints.down("md")]: {
+        width: "50%",
+        height: showingFullPalette ? "10%" : "20%"
+      },
+      [theme.breakpoints.down("xs")]: {
+        width: "100%",
+        height: showingFullPalette ? "5%" : "10%"
+      }
+    };
   },
-  copyContainer: {},
+  copyText: (props: ColorBoxProps) => {
+    const { background } = props;
+
+    return {
+      color: chroma(background!).luminance() >= 0.7 ? "black" : "white"
+    };
+  },
+  colorName: (props: ColorBoxProps) => {
+    const { background } = props;
+
+    return {
+      color: chroma(background!).luminance() <= 0.08 ? "white" : "black"
+    };
+  },
   boxContent: {
     position: "absolute",
     width: "100%",
@@ -33,37 +75,47 @@ const useStyles = makeStyles((theme: Theme) => ({
     textTransform: "uppercase",
     fontSize: "12px"
   },
-  copyButton: {
-    width: "100px",
-    height: "30px",
-    position: "absolute",
-    display: "inline-block",
-    top: "50%",
-    left: "50%",
-    marginLeft: "-50px",
-    marginTop: "-15px",
-    textAlign: "center",
-    outline: "none",
-    background: "rgba(255, 255, 255, 0.3)",
-    fontSize: "1rem",
-    lineHeight: "30px",
-    color: "white",
-    textTransform: "uppercase",
-    border: "none",
-    opacity: 0
+  copyButton: (props: ColorBoxProps) => {
+    const { background } = props;
+
+    return {
+      color:
+        chroma(background!).luminance() >= 0.7 ? "rgba(0,0,0,0.6)" : "white",
+      width: "100px",
+      height: "30px",
+      position: "absolute",
+      display: "inline-block",
+      top: "50%",
+      left: "50%",
+      marginLeft: "-50px",
+      marginTop: "-15px",
+      textAlign: "center",
+      outline: "none",
+      background: "rgba(255, 255, 255, 0.3)",
+      fontSize: "1rem",
+      lineHeight: "30px",
+      textTransform: "uppercase",
+      border: "none",
+      opacity: 0
+    };
   },
-  seeMore: {
-    background: "rgba(255, 255, 255, 0.3)",
-    position: "absolute",
-    border: "none",
-    right: "0px",
-    bottom: "0px",
-    width: "60px",
-    height: "30px",
-    textAlign: "center",
-    lineHeight: "30px",
-    textTransform: "uppercase",
-    color: "white"
+  seeMore: (props: ColorBoxProps) => {
+    const { background } = props;
+
+    return {
+      color:
+        chroma(background!).luminance() >= 0.7 ? "rgba(0,0,0,0.6)" : "white",
+      background: "rgba(255, 255, 255, 0.3)",
+      position: "absolute",
+      border: "none",
+      right: "0px",
+      bottom: "0px",
+      width: "60px",
+      height: "30px",
+      textAlign: "center",
+      lineHeight: "30px",
+      textTransform: "uppercase"
+    };
   },
   copyOverlay: {
     opacity: 0,

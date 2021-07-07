@@ -30,9 +30,11 @@ const useStyles = makeStyles((theme: Theme) => ({
     "& a": {
       textDecoration: "none",
       color: "black"
+    },
+    [theme.breakpoints.down("xs")]: {
+      display: "none"
     }
   },
-  sliderContainer: {},
   slider: {
     width: "340px",
     margin: "0 10px",

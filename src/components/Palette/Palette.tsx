@@ -5,6 +5,7 @@ import { useState } from "react";
  */
 import { Navbar } from "../Navbar";
 import { ColorBox } from "../ColorBox";
+import { Footer } from "../Footer";
 
 /**
  * Imports the component styles
@@ -75,14 +76,12 @@ export const Palette: React.FC<PaletteProps> = (props) => {
     <div className={classes.Palette}>
       <Navbar
         level={level}
+        showingAllColors
         changeLevel={changeLevel}
         handleChange={changeColorFormat}
       />
       <div className={classes.PaletteColors}>{colorBoxes}</div>
-      <footer className={classes.paletteFooter}>
-        {palette.paletteName}
-        <span className={classes.emoji}>{palette.emoji}</span>
-      </footer>
+      <Footer palette={palette.paletteName} emoji={palette.emoji} />
     </div>
   );
 };

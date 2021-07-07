@@ -8,15 +8,21 @@ import { makeStyles, Theme } from "@material-ui/core/styles";
  * Styles the component
  */
 const useStyles = makeStyles((theme: Theme) => ({
-  Palette: {
+  Page: {
     height: "100vh",
-    display: "flex",
-    flexDirection: "column",
-    overflowY: "scroll",
-    overflowX: "hidden"
-  },
-  PaletteColors: {
-    height: "90%"
+    position: "fixed",
+    width: "100%",
+    top: 0,
+    transition: "opacity 0.5s ease-in-out",
+    "& .page-enter": {
+      opacity: 0
+    },
+    "& .page-enter-active": {
+      opacity: 1
+    },
+    "& .page-exit-active": {
+      opacity: 0
+    }
   }
 }));
 

@@ -1,10 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
 /**
  * Imports Components
  */
 import { Navbar } from "../Navbar";
 import { ColorBox } from "../ColorBox";
+import { Footer } from "../Footer";
 
 /**
  * Imports the component styles
@@ -21,6 +23,7 @@ import { NewPalette } from "../../utils";
  */
 export interface SingleColorPaletteProps {
   colorId: string;
+  id: string;
   palette: NewPalette;
 }
 
@@ -30,11 +33,16 @@ export interface SingleColorPaletteProps {
 export const SingleColorPalette: React.FC<SingleColorPaletteProps> = (
   props
 ) => {
-  const { palette, colorId } = props;
+  const { palette, colorId, id } = props;
   /**
    * Gets the component styles
    */
   const classes = useStyles();
+
+  /**
+   * Init the selector format state
+   */
+  const [format, setFormat] = useState("hex");
 
   /**
    * Returns all shades of a given color
@@ -51,20 +59,33 @@ export const SingleColorPalette: React.FC<SingleColorPaletteProps> = (
     return shades.slice(1);
   };
 
+  /**
+   * Handles changing the Color format
+   */
+  const changeColorFormat = (val: string) => {
+    setFormat(val);
+  };
+
   const colorBoxes = gatherShades(palette, colorId).map((color) => (
     <ColorBox
       key={color.name}
       name={color.name}
       colorId={color.hex}
       showLink={false}
-      background={color.hex}
+      background={color[format]}
     />
   ));
 
   return (
     <div className={classes.SingleColorPalette}>
-      <h1>SingleColorPalette</h1>
-      <div className={classes.paletteColors}>{colorBoxes}</div>
+      <Navbar handleChange={changeColorFormat} showingAllColors={false} />
+      <div className={classes.paletteColors}>
+        {colorBoxes}
+        <div className={classes.goBack}>
+          <Link to={`/palette/${id}`}>GO BACK</Link>
+        </div>
+      </div>
+      <Footer palette={palette.paletteName} emoji={palette.emoji} />
     </div>
   );
 };
