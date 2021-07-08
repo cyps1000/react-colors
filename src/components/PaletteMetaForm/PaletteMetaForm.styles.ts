@@ -8,13 +8,13 @@ import { makeStyles, Theme } from "@material-ui/core/styles";
  * Styles the component
  */
 const useStyles = makeStyles((theme: Theme) => ({
-  Palette: {
-    height: "100vh",
-    display: "flex",
-    flexDirection: "column"
-  },
-  PaletteColors: {
-    height: "90%"
+  PaletteMetaForm: {},
+  button: {
+    margin: "0 0.5rem",
+    [theme.breakpoints.down("xs")]: {
+      margin: "0 0.2rem",
+      padding: "0.3rem"
+    }
   }
 }));
 

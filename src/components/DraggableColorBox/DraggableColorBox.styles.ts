@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: "inline-block",
     position: "relative",
     cursor: "pointer",
-    marginBottom: "-4px",
+    marginBottom: "-6.5px",
     "&:hover svg": {
       color: "white",
       transform: "scale(1.5)"
@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
     return {
       position: "absolute",
-      width: "100%",
+      width: "98%",
       left: "0px",
       bottom: "0px",
       padding: "10px",
@@ -57,6 +57,9 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   deleteIcon: {
     transition: "all 0.3s ease-in-out"
+    // "&:hover": {
+    //   color: "white"
+    // }
   }
 }));
 

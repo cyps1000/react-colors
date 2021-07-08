@@ -6,6 +6,11 @@ import { render } from "react-dom";
 import { BrowserRouter as Router } from "react-router-dom";
 
 /**
+ * Normalize CSS
+ */
+import CssBaseline from "@material-ui/core/CssBaseline";
+
+/**
  * Imports the App component
  */
 import { App } from "./App";
@@ -20,6 +25,7 @@ import "./index.css";
  */
 render(
   <Router>
+    <CssBaseline />
     <App />
   </Router>,
   document.getElementById("root")

@@ -7,26 +7,26 @@ import { Story, Meta } from "@storybook/react";
 /**
  * Component Imports
  */
-import { DraggableColorBox, DraggableColorBoxProps } from "./DraggableColorBox";
+import { PaletteMetaForm, PaletteMetaFormProps } from "./PaletteMetaForm";
 
 export default {
-  title: "Components/DraggableColorBox",
-  component: DraggableColorBox
+  title: "Components/PaletteMetaForm",
+  component: PaletteMetaForm,
 } as Meta;
 
 /**
  * Defines the Template
- * @param args DraggableColorBoxProps
+ * @param args PaletteMetaFormProps
  * @returns
  */
-// const Template: Story<DraggableColorBoxProps> = (args) => (
-//   <DraggableColorBox {...args} />
-// );
+const Template: Story<PaletteMetaFormProps> = (args) => (
+  <PaletteMetaForm {...args} />
+);
 
 /**
  * Default case
  */
-//export const Default = Template.bind({});
+export const Default = Template.bind({});
 
 /**
  * Put your component props in here
@@ -38,4 +38,4 @@ export default {
  *
  * Assuming that the component expects a prop text that is a string.
  */
-//Default.args = {};
+Default.args = {};

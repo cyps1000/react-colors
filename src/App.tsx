@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Route, Switch } from "react-router-dom";
 
 /**
@@ -18,22 +19,34 @@ import { seedColors, generatePalette } from "./utils";
  * Displays the component
  */
 export const App: React.FC = () => {
+  const [palettes, setPalettes] = useState(seedColors);
   /**
    * Handles finding a palette by ID
    */
   const findPalette = (id: string) => {
-    return seedColors.find((palette) => {
+    return palettes.find((palette) => {
       return palette.id === id;
     });
+  };
+
+  /**
+   * Handles saving a palette
+   */
+  const savePalette = (newPalette: any) => {
+    setPalettes([...palettes, newPalette]);
   };
 
   return (
     <Switch>
       <Route exact path="/palette/new">
-        <NewPaletteForm />
+        <NewPaletteForm
+          maxColors={20}
+          palettes={palettes}
+          savePalette={savePalette}
+        />
       </Route>
       <Route exact path="/">
-        <PaletteList palettes={seedColors} />
+        <PaletteList palettes={palettes} />
       </Route>
       <Route
         exact

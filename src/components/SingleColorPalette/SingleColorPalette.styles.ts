@@ -11,9 +11,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   SingleColorPalette: {
     height: "100vh",
     display: "flex",
-    flexDirection: "column",
-    overflowY: "scroll",
-    overflowX: "hidden"
+    flexDirection: "column"
   },
   paletteColors: {
     height: "90%"
@@ -25,7 +23,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: "inline-block",
     position: "relative",
     cursor: "pointer",
-    marginBottom: "-3.5px",
+    marginBottom: "-6px",
     opacity: 1,
     backgroundColor: "black",
     "& a": {

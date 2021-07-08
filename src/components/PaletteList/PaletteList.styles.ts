@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     justifyContent: "center",
     backgroundColor: "#394bad",
     backgroundImage: `url(${bg})`,
-    overflow: "scroll"
+    overflowY: "scroll"
   },
   containter: {
     width: "50%",

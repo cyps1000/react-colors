@@ -1,4 +1,9 @@
 /**
+ * External Imports
+ */
+import { SortableElement } from "react-sortable-hoc";
+
+/**
  * Imports Material UI Icon
  */
 import DeleteIcon from "@material-ui/icons/Delete";
@@ -14,25 +19,32 @@ import { useStyles } from "./DraggableColorBox.styles";
 export interface DraggableColorBoxProps {
   name: string;
   color: string;
+  handleClick: any;
+  index?: number;
 }
 
 /**
  * Displays the component
  */
-export const DraggableColorBox: React.FC<DraggableColorBoxProps> = (props) => {
-  const { name, color } = props;
+export const DraggableColorBox = SortableElement(
+  (props: DraggableColorBoxProps) => {
+    const { name, color, handleClick } = props;
 
-  /**
-   * Gets the component styles
-   */
-  const classes = useStyles({ color });
+    /**
+     * Gets the component styles
+     */
+    const classes = useStyles({ color });
 
-  return (
-    <div
-      style={{ backgroundColor: color }}
-      className={classes.DraggableColorBox}
-    >
-      <span> {name}</span>
-    </div>
-  );
-};
+    return (
+      <div
+        style={{ backgroundColor: color }}
+        className={classes.DraggableColorBox}
+      >
+        <div className={classes.boxContent}>
+          <span>{name}</span>
+          <DeleteIcon className={classes.deleteIcon} onClick={handleClick} />
+        </div>
+      </div>
+    );
+  }
+);
