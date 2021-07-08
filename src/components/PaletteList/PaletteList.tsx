@@ -20,13 +20,14 @@ import { SeedColor } from "../../utils";
  */
 export interface PaletteListProps {
   palettes: SeedColor[];
+  removePalette: (id: string) => void;
 }
 
 /**
  * Displays the component
  */
 export const PaletteList: React.FC<PaletteListProps> = (props) => {
-  const { palettes } = props;
+  const { palettes, removePalette } = props;
 
   /**
    * Gets the component styles
@@ -58,6 +59,7 @@ export const PaletteList: React.FC<PaletteListProps> = (props) => {
               key={palette.id}
               goToPalette={goToPalette}
               palette={palette}
+              removePalette={removePalette}
             />
           ))}
         </div>

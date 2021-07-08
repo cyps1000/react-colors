@@ -3,7 +3,13 @@
  * @see https://material-ui.com/styles/basics/
  */
 import { makeStyles, Theme } from "@material-ui/core/styles";
-import { drawerWidth } from "../NewPaletteForm/NewPaletteForm.styles";
+
+/**
+ * Imports Drawer Width
+ */
+import { DRAWER_WIDTH } from "../../utils";
+
+const drawerWidth = DRAWER_WIDTH;
 
 /**
  * Styles the component

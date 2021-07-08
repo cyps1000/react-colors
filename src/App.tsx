@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Route, Switch } from "react-router-dom";
 
 /**
@@ -13,13 +13,21 @@ import { Page } from "./components/Page";
 /**
  * Imports Seed Colors
  */
-import { seedColors, generatePalette } from "./utils";
+import { seedColors, generatePalette, SeedColor } from "./utils";
 
 /**
  * Displays the component
  */
 export const App: React.FC = () => {
-  const [palettes, setPalettes] = useState(seedColors);
+  const savedPalettes: SeedColor[] = JSON.parse(
+    window.localStorage.getItem("palettes")!
+  );
+
+  /**
+   * Inits the Palette state
+   */
+  const [palettes, setPalettes] = useState(savedPalettes || seedColors);
+
   /**
    * Handles finding a palette by ID
    */
@@ -30,11 +38,30 @@ export const App: React.FC = () => {
   };
 
   /**
+   * Handles saving palettes to local storage
+   */
+  const syncLocalStorage = () => {
+    window.localStorage.setItem("palettes", JSON.stringify(palettes));
+  };
+
+  /**
    * Handles saving a palette
    */
   const savePalette = (newPalette: any) => {
     setPalettes([...palettes, newPalette]);
   };
+
+  /**
+   * Handles removing a palette
+   */
+  const removePalette = (id: string) => {
+    setPalettes(palettes.filter((palette) => palette.id !== id));
+  };
+
+  useEffect(() => {
+    syncLocalStorage();
+    // eslint-disable-next-line
+  }, [palettes]);
 
   return (
     <Switch>
@@ -46,7 +73,7 @@ export const App: React.FC = () => {
         />
       </Route>
       <Route exact path="/">
-        <PaletteList palettes={palettes} />
+        <PaletteList palettes={palettes} removePalette={removePalette} />
       </Route>
       <Route
         exact
@@ -67,9 +94,11 @@ export const App: React.FC = () => {
         exact
         path="/palette/:id"
         render={(props) => (
-          <Palette
-            palette={generatePalette(findPalette(props.match.params.id)!)}
-          />
+          <Page>
+            <Palette
+              palette={generatePalette(findPalette(props.match.params.id)!)}
+            />
+          </Page>
         )}
       />
     </Switch>

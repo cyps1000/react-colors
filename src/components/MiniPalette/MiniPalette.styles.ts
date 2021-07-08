@@ -57,7 +57,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     position: "absolute",
     right: "0px",
     top: "0px",
-    padding: "10px",
     zIndex: 10,
     opacity: 0
   }

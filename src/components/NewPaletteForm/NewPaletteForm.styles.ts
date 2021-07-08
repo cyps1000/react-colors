@@ -4,7 +4,12 @@
  */
 import { makeStyles, Theme } from "@material-ui/core/styles";
 
-export const drawerWidth = 400;
+/**
+ * Imports Drawer Width
+ */
+import { DRAWER_WIDTH } from "../../utils";
+
+const drawerWidth = DRAWER_WIDTH;
 
 /**
  * Styles the component

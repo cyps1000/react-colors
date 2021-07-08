@@ -44,7 +44,6 @@ export interface PaletteMetaFormProps {
   palettes: SeedColor[];
   colors: NewColor[];
   savePalette: (P: any) => void;
-  formShowing: boolean;
   closeForm: () => void;
 }
 
@@ -52,7 +51,7 @@ export interface PaletteMetaFormProps {
  * Displays the component
  */
 export const PaletteMetaForm: React.FC<PaletteMetaFormProps> = (props) => {
-  const { palettes, colors, savePalette, formShowing, closeForm } = props;
+  const { palettes, colors, savePalette, closeForm } = props;
   /**
    * Gets the component styles
    */

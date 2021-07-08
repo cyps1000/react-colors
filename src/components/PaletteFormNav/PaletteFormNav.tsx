@@ -14,13 +14,12 @@ import { PaletteMetaForm } from "../PaletteMetaForm";
 /**
  * Imports Material UI components
  */
-
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import Button from "@material-ui/core/Button";
-import MenuIcon from "@material-ui/icons/Menu";
+import AddToPhotosOutlinedIcon from "@material-ui/icons/AddToPhotosOutlined";
 
 /**
  * Imports the component styles
@@ -90,7 +89,7 @@ export const PaletteFormNav: React.FC<PaletteFormNavProps> = (props) => {
             edge="start"
             className={clsx(classes.menuButton, open && classes.hide)}
           >
-            <MenuIcon />
+            <AddToPhotosOutlinedIcon />
           </IconButton>
           <Typography variant="h6" color="inherit" noWrap>
             Create A Palette
@@ -122,7 +121,6 @@ export const PaletteFormNav: React.FC<PaletteFormNavProps> = (props) => {
           colors={colors}
           savePalette={savePalette}
           closeForm={closeForm}
-          formShowing={formShowing}
         />
       )}
     </div>
