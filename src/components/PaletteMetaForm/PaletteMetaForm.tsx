@@ -91,6 +91,7 @@ export const PaletteMetaForm: React.FC<PaletteMetaFormProps> = (props) => {
     };
 
     savePalette(newPalette);
+    setStage("");
     history.push("/");
   };
 

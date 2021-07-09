@@ -31,7 +31,7 @@ import { useStyles } from "./NewPaletteForm.styles";
 /**
  * Imports Palette interface
  */
-import { SeedColor } from "../../utils";
+import { SeedColor, seedColors, Color } from "../../utils";
 
 /**
  * Defines the props interface
@@ -68,7 +68,7 @@ export const NewPaletteForm: React.FC<NewPaletteFormProps> = (props) => {
   /**
    * Inits the colors state
    */
-  const [colors, setColors] = useState<NewColor[]>(palettes[0].colors);
+  const [colors, setColors] = useState<NewColor[]>(seedColors[0].colors);
 
   /**
    * Handles opening the drawer
@@ -113,8 +113,18 @@ export const NewPaletteForm: React.FC<NewPaletteFormProps> = (props) => {
    */
   const gibRandomColor = () => {
     const allColors = palettes.map((p) => p.colors).flat();
-    let random = Math.floor(Math.random() * allColors.length);
-    const randomColor = allColors[random];
+    let random: number;
+    let isDuplicateColor = true;
+    let randomColor: Color = { name: "", color: "" };
+
+    while (isDuplicateColor) {
+      random = Math.floor(Math.random() * allColors.length);
+      randomColor = allColors[random];
+      isDuplicateColor = colors.some(
+        // eslint-disable-next-line
+        (color) => color.name === randomColor.name
+      );
+    }
 
     setColors([...colors, randomColor]);
   };

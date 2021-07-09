@@ -1,5 +1,10 @@
 import { useState, useEffect } from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, useLocation } from "react-router-dom";
+
+/**
+ * External Imports
+ */
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 /**
  * Imports components
@@ -19,6 +24,11 @@ import { seedColors, generatePalette, SeedColor } from "./utils";
  * Displays the component
  */
 export const App: React.FC = () => {
+  const location = useLocation();
+
+  /**
+   * Handles getting palettes from local storage
+   */
   const savedPalettes: SeedColor[] = JSON.parse(
     window.localStorage.getItem("palettes")!
   );
@@ -64,46 +74,66 @@ export const App: React.FC = () => {
   }, [palettes]);
 
   return (
-    <Switch>
-      <Route exact path="/palette/new">
-        <NewPaletteForm
-          maxColors={20}
-          palettes={palettes}
-          savePalette={savePalette}
-        />
-      </Route>
-      <Route exact path="/">
-        <PaletteList palettes={palettes} removePalette={removePalette} />
-      </Route>
-      <Route
-        exact
-        path="/palette/:paletteId/:colorId"
-        render={(props) => (
-          <Page>
-            <SingleColorPalette
-              id={props.match.params.paletteId}
-              colorId={props.match.params.colorId}
-              palette={generatePalette(
-                findPalette(props.match.params.paletteId)!
+    <Route>
+      <TransitionGroup>
+        <CSSTransition key={location.key} classNames="page" timeout={500}>
+          <Switch location={location}>
+            <Route exact path="/palette/new">
+              <Page>
+                <NewPaletteForm
+                  maxColors={20}
+                  palettes={palettes}
+                  savePalette={savePalette}
+                />
+              </Page>
+            </Route>
+            <Route exact path="/">
+              <Page>
+                <PaletteList
+                  palettes={palettes}
+                  removePalette={removePalette}
+                />
+              </Page>
+            </Route>
+            <Route
+              exact
+              path="/palette/:paletteId/:colorId"
+              render={(props) => (
+                <Page>
+                  <SingleColorPalette
+                    id={props.match.params.paletteId}
+                    colorId={props.match.params.colorId}
+                    palette={generatePalette(
+                      findPalette(props.match.params.paletteId)!
+                    )}
+                  />
+                </Page>
               )}
             />
-          </Page>
-        )}
-      />
-      <Route
-        exact
-        path="/palette/:id"
-        render={(props) => (
-          <Page>
-            <Palette
-              palette={generatePalette(findPalette(props.match.params.id)!)}
+            <Route
+              exact
+              path="/palette/:id"
+              render={(props) => (
+                <Page>
+                  <Palette
+                    palette={generatePalette(
+                      findPalette(props.match.params.id)!
+                    )}
+                  />
+                </Page>
+              )}
             />
-          </Page>
-        )}
-      />
-    </Switch>
-    // <div>
-    //   <Palette palette={generatePalette(seedColors[4])} />
-    // </div>
+            <Route>
+              <Page>
+                <PaletteList
+                  palettes={palettes}
+                  removePalette={removePalette}
+                />
+              </Page>
+            </Route>
+          </Switch>
+        </CSSTransition>
+      </TransitionGroup>
+    </Route>
   );
 };

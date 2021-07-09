@@ -27,9 +27,13 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: "flex",
     alignItems: "flex-start",
     justifyContent: "center",
+    /* background by SVGBackgrounds.com */
     backgroundColor: "#394bad",
     backgroundImage: `url(${bg})`,
     overflowY: "scroll"
+  },
+  heading: {
+    fontSize: "2rem"
   },
   containter: {
     width: "50%",

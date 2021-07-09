@@ -19,14 +19,14 @@ import { SeedColor } from "../../utils";
 export interface MiniPaletteProps {
   palette: SeedColor;
   goToPalette: (id: string) => void;
-  removePalette: (id: string) => void;
+  openDialog: (id: string) => void;
 }
 
 /**
  * Displays the component
  */
 export const MiniPalette: React.FC<MiniPaletteProps> = (props) => {
-  const { palette, goToPalette, removePalette } = props;
+  const { palette, goToPalette, openDialog } = props;
 
   /**
    * Gets the component styles
@@ -49,7 +49,7 @@ export const MiniPalette: React.FC<MiniPaletteProps> = (props) => {
    */
   const deletePalette = (e: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
     e.stopPropagation();
-    removePalette(palette.id);
+    openDialog(palette.id);
   };
 
   /**

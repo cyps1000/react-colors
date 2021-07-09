@@ -1,7 +1,7 @@
 /**
  * Imports the component styles
  */
-import { useStyles } from "./Page.styles";
+import "./Page.css";
 
 /**
  * Displays the component
@@ -9,10 +9,5 @@ import { useStyles } from "./Page.styles";
 export const Page: React.FC = (props) => {
   const { children } = props;
 
-  /**
-   * Gets the component styles
-   */
-  const classes = useStyles();
-
-  return <div className={classes.Page}>{children}</div>;
+  return <section className="page">{children}</section>;
 };
